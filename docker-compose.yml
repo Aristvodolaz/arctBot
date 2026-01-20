@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  telegram-bot:
+    build: .
+    container_name: arctbot
+    restart: unless-stopped
+    
+    # Environment variables from .env file
+    env_file:
+      - .env
+    
+    # Mount volumes
+    volumes:
+      # Persist logs
+      - ./logs:/app/logs
+      # Google credentials (read-only)
+      - ./config/google_credentials.json:/app/config/google_credentials.json:ro
+    
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # Health check (optional)
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep -f 'python main.py' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

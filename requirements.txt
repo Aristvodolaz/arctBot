@@ -1,0 +1,14 @@
+# Telegram Bot Library
+python-telegram-bot==20.8
+
+# Google API Libraries
+google-auth==2.27.0
+google-auth-oauthlib==1.2.0
+google-auth-httplib2==0.2.0
+google-api-python-client==2.116.0
+
+# Environment Variables
+python-dotenv==1.0.1
+
+# Additional utilities
+cachetools==5.3.2

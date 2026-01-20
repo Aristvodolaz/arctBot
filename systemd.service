@@ -1,0 +1,28 @@
+# Systemd service file for running bot on Linux server
+# Place this file in /etc/systemd/system/arctbot.service
+
+[Unit]
+Description=ArctBot Telegram Bot
+After=network.target
+
+[Service]
+Type=simple
+User=YOUR_USER
+WorkingDirectory=/path/to/arctBot
+Environment="PATH=/path/to/arctBot/venv/bin"
+ExecStart=/path/to/arctBot/venv/bin/python /path/to/arctBot/main.py
+
+# Restart policy
+Restart=on-failure
+RestartSec=10
+
+# Logging
+StandardOutput=append:/path/to/arctBot/logs/systemd.log
+StandardError=append:/path/to/arctBot/logs/systemd-error.log
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

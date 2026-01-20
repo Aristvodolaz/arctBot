@@ -1,0 +1,37 @@
+# Render.com deployment configuration
+# https://render.com
+
+services:
+  - type: worker
+    name: arctbot
+    env: python
+    region: frankfurt  # или oregon, singapore
+    plan: free  # или starter, standard
+    
+    # Build command
+    buildCommand: pip install -r requirements.txt
+    
+    # Start command
+    startCommand: python main.py
+    
+    # Environment variables
+    envVars:
+      - key: BOT_TOKEN
+        sync: false  # Set manually in Render dashboard
+      
+      - key: SPREADSHEET_ID
+        value: 1YYvqtrrEG2ssNLbKnsIX3goVQfpeJ-E8wcM06P2ts7Q
+      
+      - key: LOG_LEVEL
+        value: INFO
+      
+      - key: GOOGLE_CREDENTIALS_PATH
+        value: config/google_credentials.json
+    
+    # Auto-deploy on push
+    autoDeploy: true
+    
+    # Health check
+    healthCheckPath: /  # Not applicable for worker, but Render monitors the process
+
+# Note: You'll need to manually upload google_credentials.json through Render's secret files feature
