@@ -96,7 +96,7 @@ async def start_search_callback(update: Update, context: ContextTypes.DEFAULT_TY
     await query.edit_message_text(
         "✍️ <b>Введите данные для поиска:</b>\n\n"
         "Формат: Фамилия Имя Отчество Класс\n\n"
-        "Например: <code>Иванов Иван Иванович 10А</code>",
+        "Например: <code>Иванов Иван Иванович 10</code>",
         parse_mode='HTML',
         reply_markup=get_cancel_keyboard()
     )
